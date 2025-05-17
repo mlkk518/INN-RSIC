@@ -44,7 +44,7 @@ Testing set  (Baidu Netdisk) [DOTA:Download](https://pan.baidu.com/s/1R52rO-gxZH
 
 ## 🧩 Test
 [Download Pre-trained ELIC Model](https://pan.baidu.com/s/1OsPSjPp34RHasHi9YM5rHg) (Baidu Netdisk) Code：v72j
-- **Step I.**  Change the roots of ./ELIC/scripts/test.sh to your data and Use the pretrained models of [ELIC] to generate the initial decoded images.
+- **Step I.**  Change the roots of ./ELIC/scripts/test.sh (Please download ELIC from https://github.com/mlkk518/LDM-RSIC) to your data and Use the pretrained models of [ELIC] to generate the initial decoded images.
 
 - **Step II.**  Refer to option/test_IRN_compress_S1_0.0004.yml to set the data roots and pretrained models of [INN-RSIC] (./weights/), and run sh ./scripts/tetest_comS1.sh LAMBDA. Here lambda belongs to [0.0004, 0.0008, 0.0016, 0.0032,  0.045] 
 
