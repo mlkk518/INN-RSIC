@@ -1,0 +1,94 @@
+
+#### general settings
+name: IRNCom_DOTA_UC_S1_0.0004_per
+use_tb_logger: true
+model: IRN-Color-test_S1
+distortion: sr
+gpu_ids: [1]
+
+
+#### datasets
+
+datasets:
+  train:
+    name: DOTA
+    mode: LQGT
+    dataroot_GT: ./../../ELIC_Grad_Guide/results/ELIC_arch_Train_GT_GEN/mse_0.0004  # path to training HR images
+    dataroot_LQ: ./../../ELIC_Grad_Guide/results/ELIC_arch_Train_LQ_GEN/mse_0.0004
+    use_shuffle: true
+    n_workers: 8  # per GPU
+    batch_size: 16
+    GT_size: 128
+    use_flip: true
+    use_rot: true
+    color: RGB
+    use_grey: True
+
+
+  val:
+    name: val_DOTA
+    mode: LQGT
+    dataroot_GT: ./../../ELIC_Grad_Guide/results/ELIC_arch_Test_GT_GEN/mse_0.0004  # path to validation HR images
+    dataroot_LQ: ./../../ELIC_Grad_Guide/results/ELIC_arch_Test_LQ_GEN/mse_0.0004
+    use_grey: True
+
+
+#### network structures
+
+#### network structures
+
+network_grey:
+  which_model:
+      rgb_type: RGB
+      subnet_type: DBNet
+      use_robust: False
+      Gau_channel_scale: 1
+  block_num: [8]
+  init: weight_xavier_init  #weight_xavier_init, weight_orthogonal_init, weight_init
+  Conv1x1Grey_learnable: True
+
+
+#### path
+
+path:
+  pretrain_model_G: ../experiments/pretrained_models/wo_robust/IRNCom_DOTA_UC_wo_Robust_0.0004_per/30000_G.pth
+  strict_load: true
+  resume_state: ~
+
+
+#### training settings: learning rate scheme, loss
+
+train:
+  lr_G: !!float 1e-4
+  beta1: 0.9
+  beta2: 0.999
+  niter: 500000
+  warmup_iter: -1  # no warm up
+
+  lr_scheme: MultiStepLR
+  lr_steps: [100000, 200000, 300000, 400000]
+  lr_gamma: 0.5
+
+  pixel_criterion_forw: l2
+  pixel_criterion_back: l2
+  feature_criterion: l2
+
+  manual_seed: 10
+
+  val_freq: !!float 200 #5e3
+
+  lambda_fit_forw: 1.
+  lambda_rec_back: 0.05
+  lambda_ce_forw: 200
+  feature_weight: 0.01
+  weight_decay_G: !!float 1e-5
+  gradient_clipping: 10
+
+  add_noise_on_y: True
+  y_noise_prob: 0.5
+  y_noise_scale: 0.01
+
+#### logger
+logger:
+  print_freq: 200
+  save_checkpoint_freq: !!float 1e4

@@ -1,0 +1,33 @@
+name: IRN_compress_wo_robust_0.0004_per
+suffix: ~  # add suffix to saved images
+model: IRN-Color-test_S1
+distortion: sr
+crop_border: ~  # crop border when evaluation. If None(~), crop the scale pixels
+gpu_ids: [1]
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: DOTA
+    mode: LQGT
+    dataroot_GT: /media/xjtu-ei/Disk_8T/LJH/LIC/ELIC_Grad_Guide/results/ELIC_arch_Test_DOTA_GT_GEN/mse_0.0008/
+    dataroot_LQ: /media/xjtu-ei/Disk_8T/LJH/LIC/ELIC_Grad_Guide/results/ELIC_arch_base/DOTA_test_mse_0.0004/
+    use_grey: True
+
+
+
+#### network
+network_grey:
+  which_model:
+    rgb_type: RGB
+    subnet_type: DBNet
+    use_robust: False
+    Gau_channel_scale: 1
+    Model_test: true
+  block_num: [8]
+  init: xavier
+  Conv1x1Grey_learnable: True
+
+
+#### path
+path:
+  pretrain_model_G: ./weights/IRNCom_DOTA_UC_wo_Robust_0.0004_per/last_G.pth
