@@ -96,12 +96,23 @@ This work was supported by:
 
 
 ```
-@article{li2024enhancing,
-  title={Enhancing Perception Quality in Remote Sensing Image Compression via Invertible Neural Network},
-  author={Li, Junhui and Hou, Xingsong},
-  journal={arXiv preprint arXiv:2405.10518},
-  year={2024}
+
+@Article{rs17122074,
+AUTHOR = {Li, Junhui and Hou, Xingsong},
+TITLE = {Enhancing Perception Quality in Remote Sensing Image Compression via Invertible Neural Network},
+JOURNAL = {Remote Sensing},
+VOLUME = {17},
+YEAR = {2025},
+NUMBER = {12},
+ARTICLE-NUMBER = {2074},
+URL = {https://www.mdpi.com/2072-4292/17/12/2074},
+ISSN = {2072-4292},
+
 }
+
+
+
+
 
 @ARTICLE{10980206,
   author={Li, Junhui and Li, Jutao and Hou, Xingsong and Wang, Huake},
